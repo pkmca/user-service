@@ -21,9 +21,9 @@ public class PersonServiceImpl implements PersonService {
     public void updatePerson(Integer id, Person person) {
         Person p = userRepository.findById(id).orElseThrow( () ->
                 new DataNotFoundException("Person is not exists by id" + id));
-        p.setFirstName(person.getFirstName());
-        p.setMiddleName(person.getMiddleName());
-        p.setLastName(person.getLastName());
+//        p.setFirstName(person.getFirstName());
+//        p.setMiddleName(person.getMiddleName());
+//        p.setLastName(person.getLastName());
         userRepository.save(p);
     }
 

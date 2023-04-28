@@ -2,7 +2,6 @@ package com.example.userservice.controller;
 
 import com.example.userservice.ResponseHandler;
 import com.example.userservice.model.Flat;
-import com.example.userservice.model.Person;
 import com.example.userservice.service.FlatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

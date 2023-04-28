@@ -3,11 +3,13 @@ package com.example.userservice.model;
 import com.example.userservice.enums.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@Getter
 public class Person {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
