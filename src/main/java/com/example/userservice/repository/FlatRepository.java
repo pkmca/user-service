@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FlatRepository extends JpaRepository<Flat,Integer> {
 
+    boolean existsByFlatNumberAndIdNot(String flatNumber, int i);
+
 }

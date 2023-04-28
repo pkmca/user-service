@@ -1,9 +1,11 @@
 package com.example.userservice.service;
 
+import com.example.userservice.dto.FlatDto;
 import com.example.userservice.exception.DataNotFoundException;
+import com.example.userservice.exception.DuplicateDataException;
 import com.example.userservice.model.Flat;
-import com.example.userservice.model.Person;
 import com.example.userservice.repository.FlatRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,26 +16,38 @@ public class FlatServiceImpl implements FlatService{
     private FlatRepository flatRepository;
 
     @Override
-    public void addFlat(Flat flat) {
+    public void addFlat(FlatDto flatDto) {
+        if (flatRepository.existsByFlatNumberAndIdNot(flatDto.getFlatNumber(), -1)) {
+            throw new DuplicateDataException("Flat is already registered with the number " + flatDto.getFlatNumber());
+        }
+        Flat flat = new Flat();
+        BeanUtils.copyProperties(flatDto,flat);
         flatRepository.save(flat);
     }
 
     @Override
-    public void updateFlat(Integer id, Flat flat) {
-        Flat f = flatRepository.findById(id).orElseThrow( () ->
+    public void updateFlat(Integer id, FlatDto flatDto) {
+        Flat flat = flatRepository.findById(id).orElseThrow( () ->
                 new DataNotFoundException("Flat is not exists by id" + id));
-//        f.setBlock(flat.getBlock());
-//        f.setFlatNumber(flat.getFlatNumber());
-//        f.setFloor(flat.getFloor());
-//        f.setOwnerId(flat.getOwnerId());
-//        f.setTenantId(f.getTenantId());
-        flatRepository.save(f);
+        if (flatRepository.existsByFlatNumberAndIdNot(flatDto.getFlatNumber(), id)) {
+            throw new DuplicateDataException("You can not change the flat number as it's " +
+                    "already registered with the number " + flatDto.getFlatNumber());
+        }
+        flat.setBlock(flatDto.getBlock());
+        flat.setFlatNumber(flatDto.getFlatNumber());
+        flat.setFloor(flatDto.getFloor());
+        flat.setOwnerId(flatDto.getOwnerId());
+        flat.setTenantId(flatDto.getTenantId());
+        flatRepository.save(flat);
     }
 
     @Override
-    public Flat getFlat(Integer id) {
-        return flatRepository.findById(id).orElseThrow( () ->
+    public FlatDto getFlat(Integer id) {
+        Flat flat = flatRepository.findById(id).orElseThrow( () ->
                 new DataNotFoundException("Flat is not exists by id " + id));
+        FlatDto flatDto = new FlatDto();
+        BeanUtils.copyProperties(flat,flatDto);
+        return flatDto;
     }
 
     @Override

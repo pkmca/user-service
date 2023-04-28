@@ -1,6 +1,7 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.ResponseHandler;
+import com.example.userservice.dto.FlatDto;
 import com.example.userservice.model.Flat;
 import com.example.userservice.service.FlatService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +21,14 @@ public class FlatController {
   private FlatService flatService;
 
   @PostMapping(value = "/create")
-  public ResponseEntity<Map<String,Object>> addFlat(@RequestBody Flat flat){
-    flatService.addFlat(flat);
+  public ResponseEntity<Map<String,Object>> addFlat(@RequestBody FlatDto flatDto){
+    flatService.addFlat(flatDto);
     return ResponseHandler.generateResponse(HttpStatus.OK, true, true);
   }
 
   @PutMapping(value = "/update/{id}")
-  public ResponseEntity<Map<String,Object>> updateFlat(@PathVariable Integer id, @RequestBody Flat flat){
-    flatService.updateFlat(id, flat);
+  public ResponseEntity<Map<String,Object>> updateFlat(@PathVariable Integer id, @RequestBody FlatDto flatDto){
+    flatService.updateFlat(id, flatDto);
     return ResponseHandler.generateResponse(HttpStatus.OK, true, true);
   }
 

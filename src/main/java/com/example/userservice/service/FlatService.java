@@ -1,14 +1,15 @@
 package com.example.userservice.service;
 
 
+import com.example.userservice.dto.FlatDto;
 import com.example.userservice.model.Flat;
 
 public interface FlatService {
-  void addFlat(Flat flat);
+  void addFlat(FlatDto flatDto);
 
-  void updateFlat(Integer id, Flat flat);
+  void updateFlat(Integer id, FlatDto flatDto);
 
-  Flat getFlat(Integer id);
+  FlatDto getFlat(Integer id);
 
   boolean deleteFlat(Integer id);
 }

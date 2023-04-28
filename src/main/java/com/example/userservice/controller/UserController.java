@@ -1,8 +1,9 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.ResponseHandler;
-import com.example.userservice.model.Person;
-import com.example.userservice.service.PersonService;
+import com.example.userservice.dto.UserDto;
+import com.example.userservice.model.User;
+import com.example.userservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,31 +15,31 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/user")
 @Slf4j
-public class PersonController {
+public class UserController {
 
   @Autowired
-  private PersonService personService;
+  private UserService userService;
 
   @PostMapping(value = "/create")
-  public ResponseEntity<Map<String,Object>> createUser(@RequestBody Person person){
-    personService.createPerson(person);
+  public ResponseEntity<Map<String,Object>> createUser(@RequestBody UserDto userDto){
+    userService.createUser(userDto);
     return ResponseHandler.generateResponse(HttpStatus.OK, true, true);
   }
 
   @PutMapping(value = "/update/{id}")
-  public ResponseEntity<Map<String,Object>> updateUser(@PathVariable Integer id, @RequestBody Person person){
-    personService.updatePerson(id, person);
+  public ResponseEntity<Map<String,Object>> updateUser(@PathVariable Integer id, @RequestBody UserDto userDto){
+    userService.updateUser(id, userDto);
     return ResponseHandler.generateResponse(HttpStatus.OK, true, true);
   }
 
   @GetMapping(value = "/{id}")
   public ResponseEntity<Map<String,Object>> getUser(@PathVariable Integer id){
-    return ResponseHandler.generateResponse(HttpStatus.OK, true, personService.getPerson(id));
+    return ResponseHandler.generateResponse(HttpStatus.OK, true, userService.getUser(id));
   }
 
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Integer id){
-    return ResponseHandler.generateResponse(HttpStatus.OK, true, personService.deleteUser(id));
+    return ResponseHandler.generateResponse(HttpStatus.OK, true, userService.deleteUser(id));
   }
 
 
