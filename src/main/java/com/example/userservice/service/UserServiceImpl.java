@@ -1,5 +1,6 @@
 package com.example.userservice.service;
 
+import com.example.userservice.dto.FlatDto;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.exception.DataNotFoundException;
 import com.example.userservice.exception.DuplicateDataException;
@@ -14,6 +15,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FlatService flatService;
 
     @Override
     public void createUser(UserDto userDto) {
@@ -45,6 +48,13 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(user, userDto);
         return userDto;
+    }
+
+    @Override
+    public UserDto getUserByFlatId(String flatNumber) {
+        FlatDto flatDto = flatService.getFlatByFlatNumber(flatNumber);
+        Integer flatUserId = flatDto.getOwnerId() == null ? flatDto.getTenantId() : flatDto.getOwnerId();
+        return getUser(flatUserId);
     }
 
     @Override

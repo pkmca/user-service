@@ -42,6 +42,9 @@ public class UserController {
     return ResponseHandler.generateResponse(HttpStatus.OK, true, userService.deleteUser(id));
   }
 
-
+  @GetMapping(value = "/flat/{flatNumber}")
+  public ResponseEntity<Map<String,Object>> getUserByFlatId(@PathVariable String flatNumber){
+    return ResponseHandler.generateResponse(HttpStatus.OK, true, userService.getUserByFlatId(flatNumber));
+  }
 
 }

@@ -11,5 +11,7 @@ public interface FlatService {
 
   FlatDto getFlat(Integer id);
 
+  FlatDto getFlatByFlatNumber(String flatNumber);
+
   boolean deleteFlat(Integer id);
 }

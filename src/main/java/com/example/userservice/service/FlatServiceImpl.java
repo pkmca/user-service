@@ -51,6 +51,17 @@ public class FlatServiceImpl implements FlatService{
     }
 
     @Override
+    public FlatDto getFlatByFlatNumber(String flatNumber) {
+        Flat flat = flatRepository.findByFlatNumber(flatNumber);
+        if (flat == null) {
+            throw new DataNotFoundException("Flat is not exists by flatNumber " + flatNumber);
+        }
+        FlatDto flatDto = new FlatDto();
+        BeanUtils.copyProperties(flat,flatDto);
+        return flatDto;
+    }
+
+    @Override
     public boolean deleteFlat(Integer id) {
         flatRepository.deleteById(id);
         return true;

@@ -1,7 +1,6 @@
 package com.example.userservice.service;
 
 import com.example.userservice.dto.UserDto;
-import com.example.userservice.model.User;
 
 public interface UserService {
 
@@ -10,6 +9,8 @@ public interface UserService {
   void updateUser(Integer id, UserDto user);
 
   UserDto getUser(Integer id);
+
+  UserDto getUserByFlatId(String flatId);
 
   boolean deleteUser(Integer id);
 }
