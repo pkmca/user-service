@@ -43,8 +43,8 @@ public class UserController {
   }
 
   @GetMapping(value = "/flat/{flatNumber}")
-  public ResponseEntity<Map<String,Object>> getUserByFlatId(@PathVariable String flatNumber){
-    return ResponseHandler.generateResponse(HttpStatus.OK, true, userService.getUserByFlatId(flatNumber));
+  public UserDto getUserByFlatId(@PathVariable String flatNumber){
+    return userService.getUserByFlatId(flatNumber);
   }
 
 }

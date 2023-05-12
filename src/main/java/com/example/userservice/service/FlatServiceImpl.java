@@ -7,7 +7,10 @@ import com.example.userservice.model.Flat;
 import com.example.userservice.repository.FlatRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FlatServiceImpl implements FlatService{
@@ -65,5 +68,10 @@ public class FlatServiceImpl implements FlatService{
     public boolean deleteFlat(Integer id) {
         flatRepository.deleteById(id);
         return true;
+    }
+
+    @Override
+    public List<Flat> getAllFlat(int pageSize, int pageNumber) {
+        return flatRepository.findAll(PageRequest.of(pageNumber,pageSize)).toList();
     }
 }

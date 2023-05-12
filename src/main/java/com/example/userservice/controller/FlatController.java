@@ -6,6 +6,7 @@ import com.example.userservice.model.Flat;
 import com.example.userservice.service.FlatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,12 @@ public class FlatController {
   @GetMapping(value = "/{id}")
   public ResponseEntity<Map<String,Object>> getFlat(@PathVariable Integer id){
     return ResponseHandler.generateResponse(HttpStatus.OK, true, flatService.getFlat(id));
+  }
+
+  @GetMapping(value = "/all")
+  public ResponseEntity<Map<String,Object>> getAllFlat(@RequestParam("pageSize") int pageSize,
+                                                       @RequestParam("pageNo") int pageNo){
+    return ResponseHandler.generateResponse(HttpStatus.OK, true, flatService.getAllFlat(pageSize, pageNo));
   }
 
   @DeleteMapping(value = "/{id}")
