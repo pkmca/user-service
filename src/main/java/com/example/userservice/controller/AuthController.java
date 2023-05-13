@@ -24,11 +24,6 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
- /*   @PostMapping("/register")
-    public String addNewUser(@RequestBody UserCredential request) {
-        return authService.saveUser(request);
-    }
-*/
     @PostMapping("/generate")
     public String authenticateAndGetToken(@RequestBody AuthRequest request) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUserName(),request.getPassword()));
@@ -40,10 +35,4 @@ public class AuthController {
         }
 
     }
-/*
-    @GetMapping("/validate")
-    public String validateToken(@RequestParam("token") String token) {
-        jwtService.validateToken(token);
-        return "Token is valid";
-    }*/
 }

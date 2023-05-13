@@ -2,7 +2,6 @@ package com.example.userservice.controller;
 
 import com.example.userservice.ResponseHandler;
 import com.example.userservice.dto.UserDto;
-import com.example.userservice.model.User;
 import com.example.userservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
