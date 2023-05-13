@@ -8,6 +8,7 @@ import com.example.userservice.model.User;
 import com.example.userservice.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,12 +19,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private FlatService flatService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void createUser(UserDto userDto) {
         if (userRepository.existsByEmailAndIdNot(userDto.getEmail(), -1)) {
             throw new DuplicateDataException("Email is already exists! Please try with different email");
         }
         User user = new User();
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         BeanUtils.copyProperties(userDto,user);
         userRepository.save(user);
     }

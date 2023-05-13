@@ -6,27 +6,24 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-
     @JsonProperty
     private Integer id;
-
     @JsonProperty
     private String email;
-
     @JsonProperty
     private String firstName;
-
     @JsonProperty
     private String middleName;
-
     @JsonProperty
     private String lastName;
-
     @JsonProperty
     private String contactNumber;
-
     @JsonProperty
     private Role role;
+    @JsonProperty
+    private String userName;
+    @JsonProperty
+    private String password;
 
     public Integer getId() {
         return id;
@@ -82,5 +79,21 @@ public class UserDto {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

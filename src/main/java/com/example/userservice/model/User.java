@@ -39,6 +39,12 @@ public class User {
   @Column(name = "contactNumber", nullable = false)
   private String contactNumber;
 
+  @Column(name ="user_name")
+  private String userName;
+
+  @Column(name ="password")
+  private String password;
+
   public Integer getId() {
     return id;
   }
@@ -93,5 +99,21 @@ public class User {
 
   public void setContactNumber(String contactNumber) {
     this.contactNumber = contactNumber;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
